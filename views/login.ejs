@@ -1,0 +1,9 @@
+<%- include('layout', { body: `
+  <h1>Login</h1>
+  <form method="post" action="/login">
+    <input name="username" placeholder="Username" required />
+    <input name="password" type="password" placeholder="Password" required />
+    <button>Login</button>
+  </form>
+  <p><a href="/forgot">Forgot password?</a></p>
+` }) %>

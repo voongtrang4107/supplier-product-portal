@@ -1,0 +1,9 @@
+<%- include('../layout', { body: `
+  <h1>${supplier && supplier._id ? 'Edit' : 'Create'} Supplier</h1>
+  <form method="post" action="${supplier && supplier._id ? '/suppliers/' + supplier._id + '/edit' : '/suppliers/create'}">
+    <input name="name" placeholder="Name" value="${supplier.name || ''}" required />
+    <input name="address" placeholder="Address" value="${supplier.address || ''}" required />
+    <input name="phone" placeholder="Phone" value="${supplier.phone || ''}" required />
+    <button>Save</button>
+  </form>
+` }) %>

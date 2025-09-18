@@ -1,0 +1,35 @@
+<%- include('../layout', { body: `
+  <h1>Products</h1>
+  <a href="/products/create">+ New Product</a>
+
+  <form method="get" action="/products" style="margin-top:8px">
+    <input type="text" name="q" placeholder="Search name..." value="${q || ''}" />
+    <select name="supplier">
+      <option value="">-- Supplier --</option>
+      ${suppliers.map(s => `
+        <option value="${s._id}" ${String(currentSupplier)===String(s._id)?'selected':''}>${s.name}</option>
+      `).join('')}
+    </select>
+    <button>Filter</button>
+  </form>
+
+  <table>
+    <thead><tr><th>Name</th><th>Price</th><th>Qty</th><th>Supplier</th><th>Actions</th></tr></thead>
+    <tbody>
+      ${products.map(p => `
+        <tr>
+          <td>${p.name}</td>
+          <td>${p.price}</td>
+          <td>${p.qty}</td>
+          <td>${p.supplier?.name || "N/A"}</td>
+          <td>
+            <a href="/products/${p._id}/edit">Edit</a>
+            <form method="post" action="/products/${p._id}/delete" style="display:inline">
+              <button onclick="return confirm('Delete?')">Delete</button>
+            </form>
+          </td>
+        </tr>
+      `).join('')}
+    </tbody>
+  </table>
+` }) %>

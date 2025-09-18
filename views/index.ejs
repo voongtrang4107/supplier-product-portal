@@ -1,0 +1,23 @@
+<%- include('layout', { body: `
+  <h1>Home</h1>
+
+  <form method="get" action="/">
+    <input type="text" name="q" placeholder="Search product name..." value="${q || ''}" />
+    <select name="supplier">
+      <option value="">-- Filter by supplier --</option>
+      ${suppliers.map(s => `
+        <option value="${s._id}" ${String(currentSupplier)===String(s._id)?'selected':''}>${s.name}</option>
+      `).join('')}
+    </select>
+    <button type="submit">Filter</button>
+  </form>
+
+  <ul>
+    ${products.map(p => `
+      <li>
+        <strong>${p.name}</strong> - $${p.price} - Qty: ${p.qty}
+        <em>(Supplier: ${p.supplier?.name || 'N/A'})</em>
+      </li>
+    `).join('')}
+  </ul>
+`}) %>
